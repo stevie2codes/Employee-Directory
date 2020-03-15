@@ -1,5 +1,7 @@
 import axios from "axios";
 
-export default(){
-   return  axios.get('https://randomuser.me/api/');
-}
+export default {
+  search: function(query) {
+    return axios.get("https://randomuser.me/api/" + query);
+  }
+};

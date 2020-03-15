@@ -11,9 +11,10 @@
   top: 0;
   position: absolute;
   font-family: "Abril Fatface", cursive;
+  border-bottom: 1px solid #bf4011;
 }
 /* Color Theme Swatches in Hex */
-/* .Fashion-1-hex {
+.Fashion-1-hex {
   color: #d95a11;
 }
 .Fashion-2-hex {
@@ -27,4 +28,4 @@
 }
 .Fashion-5-hex {
   color: #590404;
-} */
+}
