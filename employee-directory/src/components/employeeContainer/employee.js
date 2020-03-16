@@ -1,22 +1,24 @@
 import api from "../../utils/api";
 import React, { Component } from "react";
+import List from "../list";
 
 class Employee extends Component {
   state = {
-    result: {}
+    results: []
   };
 
   componentDidMount() {
     this.searchEmployee();
   }
+
   searchEmployee = query => {
     api
       .search(query)
-      .then(res => this.setState({ result: res.data }))
+      .then(res => this.setState({ results: res.data.results }))
       .catch(err => console.log(err));
   };
   render() {
-    return <h1>employee</h1>;
+    return <List name={this.state.results.length} />;
   }
 }
 
