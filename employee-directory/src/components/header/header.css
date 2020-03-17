@@ -1,31 +1,24 @@
-.main {
-  background-color: #590404;
+.headerText {
+  background: rgb(254, 156, 1);
+  background: radial-gradient(
+    circle,
+    rgba(254, 156, 1, 1) 0%,
+    rgba(229, 50, 110, 1) 100%
+  );
   min-height: 20vh;
+  margin: 30px auto;
+  width: 95%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  border: 5px solid rgb(15, 15, 23);
+  box-shadow: 3px 3px 24px -10px rgb(253, 75, 75),
+    -3px -3px 24px -10px rgb(253, 75, 75);
+  border-radius: 3px;
   justify-content: center;
-  font-size: calc(14px + 2vmin);
-  color: white;
-  width: 100%;
-  top: 0;
-  position: absolute;
-  font-family: "Abril Fatface", cursive;
-  border-bottom: 1px solid #bf4011;
-}
-/* Color Theme Swatches in Hex */
-.Fashion-1-hex {
-  color: #d95a11;
-}
-.Fashion-2-hex {
-  color: #bf4011;
-}
-.Fashion-3-hex {
-  color: #a61f12;
-}
-.Fashion-4-hex {
-  color: #260101;
-}
-.Fashion-5-hex {
-  color: #590404;
+  font-size: calc(16px + 2vmin);
+  -webkit-text-stroke: 1px black;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  letter-spacing: 2px;
+  font-family: "Paytone One", sans-serif;
 }
