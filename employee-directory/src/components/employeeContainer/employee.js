@@ -1,59 +1,74 @@
 // import api from "../../utils/api";
 import React, { Component } from "react";
 import Header from "../header/header";
-import { getEmployees } from "../../employeeData";
+import { getEmployees } from "../../utils/employeeData";
+import { getGenders } from "../../utils/genders";
 import "./employee.css";
 import "bootstrap/dist/css/bootstrap.css";
-
+import ListGroup from "../../utils/listGroup";
 class Employee extends Component {
   state = {
-    employees: getEmployees()
+    employees: [],
+    gender: []
     // results: []
   };
 
-  // componentDidMount() {
-  //   this.searchEmployee();
-  // }
+  componentDidMount() {
+    this.setState({ employees: getEmployees(), gender: getGenders() });
+  }
 
-  // searchEmployee = query => {
-  //   api
-  //     .search(query)
-  //     .then(res => this.setState({ results: res.data.results }))
-  //     .catch(err => console.log(err));
-  // };
+  handleGenderSelect = gender => {
+    this.setState({ selectedGender: gender });
+  };
+
   render() {
     const { length: count } = this.state.employees;
+    const { selectedGender, allEmployees: employees } = this.state;
+
     return (
-      <React.Fragment>
+      <div className="row">
         <Header />
-        <p className="employeeCount">Showing {count} Employees in the DB</p>
-        <table className="table table-dark ">
-          <thead className="head">
-            <tr className="trow">
-              <th scope="col">Avatar</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.employees.map(employee => (
-              <tr key={employee._id}>
-                <td>
-                  <img className="avatar" src={employee.picture} alt="avatar" />
-                </td>
-                <td>
-                  {employee.title}
-                  {employee.name.first}
-                  {employee.name.last}
-                </td>
-                <td>{employee.email}</td>
-                <td>{employee.location}</td>
+        <div className="col-3">
+          <ListGroup
+            items={this.state.gender}
+            selectedItem={this.state.selectedGender}
+            onItemSelect={this.handleGenderSelect}
+          />
+        </div>
+        <div className="col">
+          <p className="employeeCount">Showing {count} Employees in the DB</p>
+          <table className="table table-dark ">
+            <thead className="head">
+              <tr className="trow">
+                <th scope="col">Avatar</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Location</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </React.Fragment>
+            </thead>
+            <tbody>
+              {this.state.employees.map(employee => (
+                <tr key={employee._id}>
+                  <td>
+                    <img
+                      className="avatar"
+                      src={employee.picture}
+                      alt="avatar"
+                    />
+                  </td>
+                  <td>
+                    {employee.title}
+                    {employee.name.first}
+                    {employee.name.last}
+                  </td>
+                  <td>{employee.email}</td>
+                  <td>{employee.location}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 }

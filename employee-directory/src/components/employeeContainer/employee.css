@@ -16,5 +16,6 @@
 
 .avatar {
   border-radius: 50%;
-  border: 0.5px solid rgb(0, 255, 55);
+  border: 1px solid rgb(0, 255, 55);
+  box-shadow: -4px -4px 14px #353434, 4px 4px 14px #000000bb;
 }
