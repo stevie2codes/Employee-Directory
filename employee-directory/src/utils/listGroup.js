@@ -1,4 +1,5 @@
 import React from "react";
+import "../../src/components/employeeContainer/employee.css";
 
 const ListGroup = props => {
   const {
@@ -9,7 +10,7 @@ const ListGroup = props => {
     selectedItem
   } = props;
   return (
-    <ul className="li-group mt-5">
+    <ul className="li-group">
       {items.map(item => (
         <li
           onClick={() => onItemSelect(item)}

@@ -28,14 +28,13 @@ class Employee extends Component {
     return (
       <div className="row">
         <Header />
-        <div className="col-3">
+        <div className="col">
           <ListGroup
             items={this.state.gender}
             selectedItem={this.state.selectedGender}
             onItemSelect={this.handleGenderSelect}
           />
-        </div>
-        <div className="col">
+
           <p className="employeeCount">Showing {count} Employees in the DB</p>
           <table className="table table-dark ">
             <thead className="head">
