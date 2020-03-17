@@ -1,6 +1,6 @@
 import api from "../../utils/api";
 import React, { Component } from "react";
-import List from "../list";
+import Table from "../table/table";
 import Header from "../header/header";
 
 class Employee extends Component {
@@ -22,7 +22,7 @@ class Employee extends Component {
     return (
       <React.Fragment>
         <Header />
-        <List className="listContainer" name={this.state.results.length} />
+        <Table className="listContainer" name={this.state.results.length} />
       </React.Fragment>
     );
   }
