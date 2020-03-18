@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import ListGroup from "../../utils/listGroup";
 import Pagination from "../pagination/pagination";
 import paginate from "../../utils/paginate";
+import EmployeesTable from "../employeeTable/employeeTable";
 class Employee extends Component {
   state = {
     employees: [],
@@ -17,12 +18,13 @@ class Employee extends Component {
   };
 
   componentDidMount() {
-    this.setState({ employees: getEmployees(), gender: getGenders() });
+    const genders = [{ name: "All" }, ...getGenders()];
+    this.setState({ employees: getEmployees(), gender: genders });
   }
 
   handleGenderSelect = gender => {
     console.log(gender);
-    this.setState({ selectedGender: gender });
+    this.setState({ selectedGender: gender, currentPage: 1 });
   };
 
   handlePageChange = page => {
@@ -38,9 +40,10 @@ class Employee extends Component {
       employees: allEmployees
     } = this.state;
 
-    const filtered = selectedGender
-      ? this.state.employees.filter(e => e.gender._id === selectedGender._id)
-      : this.state.employees;
+    const filtered =
+      selectedGender && selectedGender._id
+        ? this.state.employees.filter(e => e.gender._id === selectedGender._id)
+        : this.state.employees;
     const employees = paginate(filtered, currentPage, pageSize);
     return (
       <div className="row">
@@ -55,36 +58,7 @@ class Employee extends Component {
           <p className="employeeCount">
             Showing {filtered.length} Employees in the DB
           </p>
-          <table className="table table-dark ">
-            <thead className="head">
-              <tr className="trow">
-                <th scope="col">Avatar</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {employees.map(employee => (
-                <tr key={employee._id}>
-                  <td>
-                    <img
-                      className="avatar"
-                      src={employee.picture}
-                      alt="avatar"
-                    />
-                  </td>
-                  <td>
-                    {employee.title}
-                    {employee.name.first}
-                    {employee.name.last}
-                  </td>
-                  <td>{employee.email}</td>
-                  <td>{employee.location}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <EmployeesTable employees={employees} />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}

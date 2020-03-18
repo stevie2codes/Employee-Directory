@@ -6,7 +6,7 @@
   align-items: center;
   border-bottom: 1px double rgb(0, 255, 55);
   justify-content: center;
-  font-size: calc(18px + 2vmin);
+  font-size: calc(24px + 2vmax);
   color: white;
   letter-spacing: 6px;
   font-family: "Michroma", sans-serif;
