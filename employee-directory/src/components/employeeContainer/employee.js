@@ -10,7 +10,6 @@ class Employee extends Component {
   state = {
     employees: [],
     gender: []
-    // results: []
   };
 
   componentDidMount() {
@@ -18,12 +17,17 @@ class Employee extends Component {
   }
 
   handleGenderSelect = gender => {
+    console.log(gender);
     this.setState({ selectedGender: gender });
   };
 
   render() {
     const { length: count } = this.state.employees;
-    const { selectedGender, allEmployees: employees } = this.state;
+    const { selectedGender } = this.state;
+
+    const filtered = selectedGender
+      ? this.state.employees.filter(e => e.gender._id === selectedGender._id)
+      : this.state.employees;
 
     return (
       <div className="row">
@@ -35,7 +39,9 @@ class Employee extends Component {
             onItemSelect={this.handleGenderSelect}
           />
 
-          <p className="employeeCount">Showing {count} Employees in the DB</p>
+          <p className="employeeCount">
+            Showing {filtered.length} Employees in the DB
+          </p>
           <table className="table table-dark ">
             <thead className="head">
               <tr className="trow">

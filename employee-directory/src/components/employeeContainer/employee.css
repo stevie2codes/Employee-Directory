@@ -21,6 +21,7 @@
 }
 
 .li-group {
+  display: flex;
   width: 200px;
   margin: 30px auto;
 }
