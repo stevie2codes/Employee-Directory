@@ -6,10 +6,14 @@ import { getGenders } from "../../utils/genders";
 import "./employee.css";
 import "bootstrap/dist/css/bootstrap.css";
 import ListGroup from "../../utils/listGroup";
+import Pagination from "../pagination/pagination";
+import paginate from "../../utils/paginate";
 class Employee extends Component {
   state = {
     employees: [],
-    gender: []
+    gender: [],
+    pageSize: 4,
+    currentPage: 1
   };
 
   componentDidMount() {
@@ -21,14 +25,23 @@ class Employee extends Component {
     this.setState({ selectedGender: gender });
   };
 
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
   render() {
     const { length: count } = this.state.employees;
-    const { selectedGender } = this.state;
+    const {
+      selectedGender,
+      pageSize,
+      currentPage,
+      employees: allEmployees
+    } = this.state;
 
     const filtered = selectedGender
       ? this.state.employees.filter(e => e.gender._id === selectedGender._id)
       : this.state.employees;
-
+    const employees = paginate(filtered, currentPage, pageSize);
     return (
       <div className="row">
         <Header />
@@ -52,7 +65,7 @@ class Employee extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.employees.map(employee => (
+              {employees.map(employee => (
                 <tr key={employee._id}>
                   <td>
                     <img
@@ -72,6 +85,12 @@ class Employee extends Component {
               ))}
             </tbody>
           </table>
+          <Pagination
+            itemsCount={filtered.length}
+            pageSize={pageSize}
+            onPageChange={this.handlePageChange}
+            currentPage={currentPage}
+          />
         </div>
       </div>
     );
