@@ -9,16 +9,18 @@ import ListGroup from "../../utils/listGroup";
 import Pagination from "../pagination/pagination";
 import paginate from "../../utils/paginate";
 import EmployeesTable from "../employeeTable/employeeTable";
+import _ from "lodash";
 class Employee extends Component {
   state = {
     employees: [],
     gender: [],
     pageSize: 4,
-    currentPage: 1
+    currentPage: 1,
+    sortColumn: { path: "picture", order: "asc" }
   };
 
   componentDidMount() {
-    const genders = [{ name: "All" }, ...getGenders()];
+    const genders = [{ _id: "", name: "All" }, ...getGenders()];
     this.setState({ employees: getEmployees(), gender: genders });
   }
 
@@ -31,20 +33,33 @@ class Employee extends Component {
     this.setState({ currentPage: page });
   };
 
+  handleSort = path => {
+    const sortColumn = { ...this.state.sortColumn };
+    if (sortColumn.path === path)
+      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
+    else {
+      sortColumn.path = path;
+      sortColumn.order = "asc";
+    }
+    this.setState({ sortColumn });
+  };
   render() {
-    const { length: count } = this.state.employees;
+    // const { length: count } = this.state.employees;
     const {
       selectedGender,
       pageSize,
       currentPage,
-      employees: allEmployees
+      sortColumn
+      // employees: allEmployees
     } = this.state;
 
     const filtered =
       selectedGender && selectedGender._id
         ? this.state.employees.filter(e => e.gender._id === selectedGender._id)
         : this.state.employees;
-    const employees = paginate(filtered, currentPage, pageSize);
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const employees = paginate(sorted, currentPage, pageSize);
     return (
       <div className="row">
         <Header />
@@ -58,7 +73,7 @@ class Employee extends Component {
           <p className="employeeCount">
             Showing {filtered.length} Employees in the DB
           </p>
-          <EmployeesTable employees={employees} />
+          <EmployeesTable employees={employees} onSort={this.handleSort} />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}

@@ -1,15 +1,15 @@
 import React from "react";
 
 const EmployeesTable = props => {
-  const { employees } = props;
+  const { employees, onSort } = props;
   return (
     <table className="table table-dark table-hover table-responsive-md ">
       <thead className="head">
         <tr className="trow">
-          <th scope="col">Avatar</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Location</th>
+          <th onClick={() => onSort("picture")}>Avatar</th>
+          <th onClick={() => onSort("name.last")}>Name</th>
+          <th onClick={() => onSort("email")}>Email</th>
+          <th onClick={() => onSort("location")}>Location</th>
         </tr>
       </thead>
       <tbody>

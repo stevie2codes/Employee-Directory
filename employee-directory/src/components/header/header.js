@@ -2,7 +2,11 @@ import React from "react";
 import "./header.css";
 
 const Header = props => {
-  return <h1 className="headerText">Employee-Directory</h1>;
+  return (
+    <React.Fragment>
+      <h1 className="headerText">Employee-Directory</h1>;
+    </React.Fragment>
+  );
 };
 
 export default Header;
