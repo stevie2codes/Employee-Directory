@@ -48,3 +48,9 @@
   border: none;
   color: black !important;
 }
+
+.sortIcon {
+  color: rgb(0, 255, 55);
+  margin: 3px;
+  font-size: 15px;
+}

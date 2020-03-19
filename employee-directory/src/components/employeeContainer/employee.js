@@ -33,14 +33,7 @@ class Employee extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleSort = path => {
-    const sortColumn = { ...this.state.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
+  handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
   render() {
@@ -73,7 +66,11 @@ class Employee extends Component {
           <p className="employeeCount">
             Showing {filtered.length} Employees in the DB
           </p>
-          <EmployeesTable employees={employees} onSort={this.handleSort} />
+          <EmployeesTable
+            employees={employees}
+            onSort={this.handleSort}
+            sortColumn={sortColumn}
+          />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}
