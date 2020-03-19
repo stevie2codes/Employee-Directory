@@ -1,4 +1,3 @@
-// import api from "../../utils/api";
 import React, { Component } from "react";
 import Header from "../header/header";
 import { getEmployees } from "../../utils/employeeData";
@@ -37,14 +36,7 @@ class Employee extends Component {
     this.setState({ sortColumn });
   };
   render() {
-    // const { length: count } = this.state.employees;
-    const {
-      selectedGender,
-      pageSize,
-      currentPage,
-      sortColumn
-      // employees: allEmployees
-    } = this.state;
+    const { selectedGender, pageSize, currentPage, sortColumn } = this.state;
 
     const filtered =
       selectedGender && selectedGender._id
